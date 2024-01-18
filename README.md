@@ -1,6 +1,7 @@
 # DIP project: School Finder
 ## Installation
 wip
-##Architecture
+
+## Architecture
 vite-react front end
 expressjs backend
