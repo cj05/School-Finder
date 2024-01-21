@@ -4,6 +4,8 @@
     "useDefineForClassFields": true,
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
+    "outDir": "build",        // Not required, but it helps :)
+    "esModuleInterop": true,   // Required
     "skipLibCheck": true,
 
     /* Bundler mode */
@@ -20,6 +22,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"],
+  "include": ["src","./dirToTSFiles/**/*.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

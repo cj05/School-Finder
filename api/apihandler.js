@@ -1,5 +1,4 @@
 import bodyParser from 'body-parser'
-import cLibrary from '../wrapper/cLibrary.cjs'
 const registerPostAPI = (app,uri,func) => {
     app.post("/api"+uri,func)
 }
@@ -15,12 +14,6 @@ const init = (app) => {
     registerPostAPI(app,"/lookup",(req, res) => {
         console.log(req.body)
         res.json(req.body)
-    })
-    registerPostAPI(app,"/ctest",(req, res) => {
-        console.log(req.body)
-        var out = cLibrary.sumOfN(req.body["N"])
-        console.log({out})
-        res.send({out})
     })
 }
 export default init;
