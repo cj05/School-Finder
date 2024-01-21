@@ -24,6 +24,7 @@
     "react-router-dom": "^6.20.1",
     "sass": "^1.69.5",
     "scss": "^0.2.4",
+    "stopwatch-node": "^1.1.0",
     "tfjs-npy-node": "^0.4.1",
     "ts-node": "^10.9.2",
     "vite-express": "^0.13.0"

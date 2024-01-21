@@ -3,19 +3,21 @@ import express from 'express';
 import { createServer } from 'vite';
 import apiHandler from './api/apihandler.js'
 import ViteExpress from "vite-express";
-import Model from './serverFiles/model.js';
+
+import test from './test.js'
 //import Model from './serverFiles/model.ts'
 console.log("Starting up server")
 const app = express();
 
 apiHandler(app)
 
-//const model = Model.PredictModel(Model.PrepData([[1,2],[3,4,5]]))
+//for(var i = 0;i<10;i++)
+    await test()
 
-//model.print()
 
 //Model.PrepData([[1,2],[3,4,5]]).print()
 
-Model.LoadDB("C:\\Cjs data folder\\GIT\\School Finder\\db\\model","C:\\Cjs data folder\\GIT\\School Finder\\db",true)
  
-ViteExpress.listen(app, 3000, () => console.log("http://localhost:3000"));
+ViteExpress.listen(app, 80, () => console.log("http://localhost"));
+
+

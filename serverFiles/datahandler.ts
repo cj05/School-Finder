@@ -2,7 +2,7 @@ import xlsx from 'node-xlsx';
 
 function Load(Path:string){
     const workSheetsFromFile = xlsx.parse(Path);
-    console.log(workSheetsFromFile)
+    //console.log(workSheetsFromFile)
     return workSheetsFromFile
 }
 
