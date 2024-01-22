@@ -76,6 +76,10 @@ class model {
         return model
     }*/
 
+    async Run(UniList: number[][]){
+        return this.PredictModel(this.PrepData(UniList))
+    }
+
     async PredictModel(Input: Tensor2D) {//To be optimized
         //Proof of concept
         //console.log("Predicting....")
@@ -92,7 +96,7 @@ class model {
         const uni_count = uni_vec_data.shape[0]
 
         if (uni_vec_data.shape[1] != Input.shape[0] || uni_vec_data.shape[2] != Input.shape[1])
-            throw new Error(`Input Tensor Shape Differs from database (${uni_vec_data.shape[1]} ,${uni_vec_data.shape[2]} )`)
+            throw new Error(`Input Tensor Shape Differs from database (${uni_vec_data.shape[1]} ,${uni_vec_data.shape[2]} ) -> (${Input.shape[0]} ,${Input.shape[1]} )`)
         //const uni_weight = tf.randomUniform([uni_count,size])
 
         //console.log("Database:")
@@ -210,17 +214,17 @@ class model {
 
         //console.log(ModelSkillData)
         //console.log(ModelInterestData)
-        //console.log(ModelKeyData)
-        //console.log(ModelData)
+        //console.log(JSON.stringify(ModelKeyData))
+        //console.log(JSON.stringify(ModelData))
 
         const VectorNodeData = this.GenerateCartesianVectorNodes(ModelData)
+        //VectorNodeData.print()
         return [VectorNodeData]
     }
 
 
     GenerateCartesianVectorNodes(UniList: number[][][]) {
         //{uni{catagory{data}}}
-        //
         const l = UniList.map((arrays: number[][]) => arrays.reduce((a: number[][], b) => a.flatMap(x => b.map(y => x.concat([y]))), [[]]))
         return tf.tensor3d(l)
     }

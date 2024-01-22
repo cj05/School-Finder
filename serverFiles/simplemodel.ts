@@ -5,15 +5,37 @@ import DH from './datahandler.ts'
 
 class SimpleModel{
     private Data: tf.Variable[] = []
+
+    async Run(UniList: number[][]){
+        var m = 0
+        for(var i = 0;i < UniList.length;i++){
+            m = Math.max(m,UniList[i].length)
+        }
+        for(var i = 0;i < UniList.length;i++){
+            for(var j = 0;j < m;j++){
+                if(typeof UniList[i][j] === "undefined"){
+                    UniList[i][j] = 0
+                }
+            }
+        }
+        return this.PredictModel(tf.tensor2d(UniList))
+    }
+
     async PredictModel(Input:Tensor2D){//given input 0-1 range
+
+        
         const UniD = this.Data[0]
         const uni_count = UniD.shape[0]
+        //Input.print()
+        if (UniD.shape[1] != Input.shape[0] || UniD.shape[2] != Input.shape[1])
+            throw new Error(`Input Tensor Shape Differs from database ( ${UniD.shape[1]}, ${UniD.shape[2]}) -> ( ${Input.shape[0]}, ${Input.shape[1]})`)
+        
         const PaddedInput = tf.tile(tf.expandDims(Input, 0), [uni_count, 1, 1])
 
         const WeightedCalc = UniD.mul(PaddedInput)
         const AverageCalc = WeightedCalc.sum(-1).divNoNan(UniD.sum(-1))
-        
-        return AverageCalc.mean(-1)
+        const AM = AverageCalc.mean(-1)
+        return AM.add(1).mul(0.5)
     }
 
     async LoadDB(PathToModelData:string,PathToBigData:string,ForceGenerate:boolean=false,Debug:boolean=false){
@@ -28,6 +50,7 @@ class SimpleModel{
                 const Bigdata = DH.Load(`${PathToBigData}\\bigData.xlsx`);
                 this.Data = this.GenerateModel(Bigdata).map((p) => tf.variable(p));
                 //here is for preprocessing
+                //this.Data[0].print()
                 await npy.save(`${PathToModelData}\\weightSimple.npy`, this.Data[0])
             }
             this.Data[0] = tf.variable(await npy.load(`${PathToModelData}\\weightSimple.npy`));
@@ -52,6 +75,7 @@ class SimpleModel{
         const ModelData:number[][][] = []
         const CatagoryNameData:string[][] = [[],[]] // [dimen,name]
 
+        var l = 0
         //Skill
         for(var i = 0;i < ModelSkillData.length;i++){
             ModelData.push([[],[]])
@@ -67,6 +91,7 @@ class SimpleModel{
                     CatagoryNameData[0].push(d[0])
                 }
                 ModelData[i][0][ind] = d[1]
+                l = Math.max(l,ind)
             }
             
         }
@@ -81,16 +106,28 @@ class SimpleModel{
                     CatagoryNameData[1].push(d[0])
                 }
                 ModelData[i][1][ind] = d[1]
+                l = Math.max(l,ind)
             }
         }
         ModelKeyData
+
+        //[ModelData.length,2,l+1]
+        for(var u = 0; u < ModelData.length; u++){
+            for(var v = 0; v < 2; v++){
+                for(var k = 0; k < l+1; k++){
+                    if(typeof ModelData[u][v][k] === "undefined"){
+                        ModelData[u][v][k] = 0
+                    }
+                }
+            }
+        }
         
         //console.log(ModelSkillData)
         //console.log(ModelInterestData)
         //console.log(ModelKeyData)
-        //console.log(ModelData)
+        //console.log(JSON.stringify(ModelData))
 
-        return [tf.tensor3d(ModelData)]
+        return [tf.tensor3d(ModelData,[ModelData.length,2,l+1])]
     }
 }
 

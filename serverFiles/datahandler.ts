@@ -13,6 +13,9 @@ function ParseModelData(Bigdata: {
     const UniNameList = UniCompendiumData[0]  // Uni Name Data
     const UniCount = UniNameList.length - 1   // remove the top header
 
+    const SkillList = UniCompendiumData[4]  
+    const InterestList = UniCompendiumData[5]  
+
 
 
     var TotalFacultyCount = 0
@@ -25,15 +28,16 @@ function ParseModelData(Bigdata: {
         const IndexedUniData = Bigdata[i];
         const UniName = IndexedUniData.name
         const UniInfo = IndexedUniData.data
+        
 
         const FacultyCount = UniInfo[0].length - 1//the faculty name list
         //we are going to transfer these info into permanent more efficient data storages later
         // wip
         const SkillUni = UniInfo.filter(
-            (x) => (!(typeof x[0] === 'undefined') && x[0].includes("ความถนัด"))
+            (x) => (!(typeof x[0] === 'undefined') && SkillList.includes(x[0]))
         )
         const InterestUni = UniInfo.filter(
-            (x) => (!(typeof x[0] === 'undefined') && x[0].includes(" วิชา"))
+            (x) => (!(typeof x[0] === 'undefined') && InterestList.includes(x[0]))
         )
         //console.log(SkillUni)
         //console.log(UniName)
@@ -70,7 +74,7 @@ function ParseModelData(Bigdata: {
                     var t = 0;
                     var c = 0;
                     x[j].split("\n").forEach((e: string) => {
-                        t += Number(e.split(" ")[1].split("%")[0]);
+                        t += (Number(e.split(" ")[1].split("%")[0])-1)*2;
                         c += 100
                     });
                     return [x[0], t / c];//scary, also yea its x bar
@@ -85,6 +89,7 @@ function ParseModelData(Bigdata: {
             }
         }
     }
+    console.log(ModelSkillData.length,ModelInterestData.length)
     return [ModelSkillData, ModelInterestData, ModelKeyData]
 }
 

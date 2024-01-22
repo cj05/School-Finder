@@ -4,7 +4,7 @@ import SModel from './serverFiles/simplemodel.ts';
 import fs from "fs"
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-const Sample = [[1,0.7,0.3,0.6,0.8],[0.1,0.7,0.5,0.9,0.18]]
+const Sample = [[1,0.7,-0.3,0.6],[0.1,-0.7,0.5,0.9,-0.6,-0.9,-0.3,0,0.1,-0.7,0.5,0.9,0.6,0.9,0.3,0]]
 
 export default async function run(){
     console.log(`Input Data: ${JSON.stringify(Sample)}`)
@@ -23,7 +23,7 @@ export default async function run(){
     sw.stop();
     
     sw.start('Model Prediction');
-    const model = await Model.PredictModel(Model.PrepData(Sample))
+    const model = await Model.Run(Sample)
     model.print()
     sw.stop();
 
@@ -42,7 +42,7 @@ export default async function run(){
     sw2.stop();
 
     sw2.start('Simple Model Prediction');
-    const Smodel = await SModel.PredictModel(Sample)
+    const Smodel = await SModel.Run(Sample)
     Smodel.print()
     sw2.stop();
     // whether the stop watch is currently running
