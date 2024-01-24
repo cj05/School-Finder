@@ -1,4 +1,7 @@
 import xlsx from 'node-xlsx';
+import cliProgress from 'cli-progress';
+
+// create a new progress bar instance and use shades_classic theme
 
 function Load(Path: string) {
     const workSheetsFromFile = xlsx.parse(Path);
@@ -9,13 +12,16 @@ function ParseModelData(Bigdata: {
     name: string;
     data: any[][];
 }[]) {
+    console.log("------Generating Model------")
+    const bar1 = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
+    bar1.start(100, 0);
     const UniCompendiumData = Bigdata[0].data // Uni Data Header
     const UniNameList = UniCompendiumData[0]  // Uni Name Data
     const UniCount = UniNameList.length - 1   // remove the top header
 
     const SkillList = UniCompendiumData[4]  
     const InterestList = UniCompendiumData[5]  
-
+    bar1.update(5)
 
 
     var TotalFacultyCount = 0
@@ -23,12 +29,12 @@ function ParseModelData(Bigdata: {
     const ModelSkillData: any[][] = []
     const ModelInterestData: any[][] = []
     const ModelKeyData: string[] = []
-
+    bar1.update(10)
     for (var i = 1; i <= UniCount; i++) {
         const IndexedUniData = Bigdata[i];
         const UniName = IndexedUniData.name
         const UniInfo = IndexedUniData.data
-        
+        bar1.update((i-1)/UniCount*90+10)
 
         const FacultyCount = UniInfo[0].length - 1//the faculty name list
         //we are going to transfer these info into permanent more efficient data storages later
@@ -89,6 +95,8 @@ function ParseModelData(Bigdata: {
             }
         }
     }
+    bar1.update(100)
+    console.log("")
     console.log(ModelSkillData.length,ModelInterestData.length)
     return [ModelSkillData, ModelInterestData, ModelKeyData]
 }

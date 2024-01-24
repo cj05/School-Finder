@@ -25,7 +25,7 @@ const init = (app) => {
             const SortedResponse = PDP.UniSort(Response,LookupAPI.uni())
             console.log(SortedResponse)
             res.json(SortedResponse)
-        })
+        }).catch()
     })
     registerPostGetAPI(app,"/catagory",(req, res) => {
         res.json({"Data":LookupAPI.catagory()})
