@@ -32,7 +32,7 @@ import DH from './datahandler.ts'
 //}*/
 
 class model {
-
+    private config:{[key:string]:any} = {}
     private Data: tf.Variable[] = []
     PrepData(inputSet: number[][]) {
         //we make a Cartesian Product
@@ -155,8 +155,10 @@ class model {
                 const Bigdata = DH.Load(`${PathToBigData}\\bigData.xlsx`);
                 this.Data = this.GenerateModel(Bigdata).map((p) => tf.variable(p));
                 //here is for preprocessing
+                fs.writeFileSync(`${PathToModelData}\\config.json`,JSON.stringify(this.config))
                 await npy.save(`${PathToModelData}\\weight.npy`, this.Data[0])
             }
+            this.config = JSON.parse(fs.readFileSync(`${PathToModelData}\\config.json`,'utf-8'))
             this.Data[0] = tf.variable(await npy.load(`${PathToModelData}\\weight.npy`));
             //this.Data[1] = await npy.load(`${PathToModelData}\\vector.npy`);
         }
@@ -216,6 +218,10 @@ class model {
         //console.log(ModelInterestData)
         //console.log(JSON.stringify(ModelKeyData))
         //console.log(JSON.stringify(ModelData))
+        this.config["skill_count"] = ModelData[0][0].length
+        this.config["interest_count"] = ModelData[0][1].length
+        this.config["Uni_Key_Data"] = ModelKeyData
+        this.config["Catagory_Key_Data"] = CatagoryNameData
 
         const VectorNodeData = this.GenerateCartesianVectorNodes(ModelData)
         //VectorNodeData.print()
