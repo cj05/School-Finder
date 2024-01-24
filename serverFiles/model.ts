@@ -106,7 +106,7 @@ class model {
         //console.log("1/5")
         //normalize in prep for cosine distance
         const normal_norm = tf.norm(Input, 2, -1, true) //O(n^3)
-        const normal = Input.div(normal_norm) //O(n^3)
+        const normal = Input.divNoNan(normal_norm) //O(n^3)
         const uni_weight = tf.norm(uni_vec_data, 2, -1, true) //O(n^3)
         const normal_uni_data = uni_vec_data.divNoNan(uni_weight) //O(n^3)
         //tf.

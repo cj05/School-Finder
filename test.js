@@ -8,18 +8,19 @@ const Sample = [[1,0.7,-0.3,0.6],[0.1,-0.7,0.5,0.9,-0.6,-0.9,-0.3,0,0.1,-0.7,0.5
 
 export default async function run(){
     console.log(`Input Data: ${JSON.stringify(Sample)}`)
-    RM("C:\\Cjs data folder\\GIT\\School Finder\\db\\model\\weight.npy")
+    RM(process.cwd()+"\\db\\model\\weightSimple.npy")
     const sw = new StopWatch('sw');
+    console.log(process.cwd()+"\\db")
     sw.start('Model Generation');
-    await Model.LoadDB("C:\\Cjs data folder\\GIT\\School Finder\\db\\model","C:\\Cjs data folder\\GIT\\School Finder\\db",true)
+    await Model.LoadDB(process.cwd()+"\\db\\model",process.cwd()+"\\db",true)
     sw.stop();
 
     sw.start('Model Loading');
-    await Model.LoadDB("C:\\Cjs data folder\\GIT\\School Finder\\db\\model","C:\\Cjs data folder\\GIT\\School Finder\\db",false,true)
+    await Model.LoadDB(process.cwd()+"\\db\\model",process.cwd()+"\\db",false,true)
     sw.stop();
 
     sw.start('Do_Nothing');
-    await Model.LoadDB("C:\\Cjs data folder\\GIT\\School Finder\\db\\model","C:\\Cjs data folder\\GIT\\School Finder\\db")
+    await Model.LoadDB(process.cwd()+"\\db\\model",process.cwd()+"\\db")
     sw.stop();
     
     sw.start('Model Prediction');
@@ -28,17 +29,17 @@ export default async function run(){
     sw.stop();
 
     const sw2 = new StopWatch('sw');
-    RM("C:\\Cjs data folder\\GIT\\School Finder\\db\\model\\weightSimple.npy")
+    RM(process.cwd()+"\\db\\model\\weightSimple.npy")
     sw2.start('Simple Model Generation');
-    await SModel.LoadDB("C:\\Cjs data folder\\GIT\\School Finder\\db\\model","C:\\Cjs data folder\\GIT\\School Finder\\db",true)
+    await SModel.LoadDB(process.cwd()+"\\db\\model",process.cwd()+"\\db",true)
     sw2.stop();
 
     sw2.start('Simple Model Loading');
-    await SModel.LoadDB("C:\\Cjs data folder\\GIT\\School Finder\\db\\model","C:\\Cjs data folder\\GIT\\School Finder\\db",false,true)
+    await SModel.LoadDB(process.cwd()+"\\db\\model",process.cwd()+"\\db",false,true)
     sw2.stop();
 
     sw2.start('Simple Do_Nothing');
-    await SModel.LoadDB("C:\\Cjs data folder\\GIT\\School Finder\\db\\model","C:\\Cjs data folder\\GIT\\School Finder\\db")
+    await SModel.LoadDB(process.cwd()+"\\db\\model",process.cwd()+"\\db")
     sw2.stop();
 
     sw2.start('Simple Model Prediction');

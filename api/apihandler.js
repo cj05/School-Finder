@@ -1,4 +1,5 @@
 import bodyParser from 'body-parser'
+import lookup from './LookupAPI.js'
 const registerPostAPI = (app,uri,func) => {
     app.post("/api"+uri,func)
 }
@@ -13,7 +14,10 @@ const init = (app) => {
     })
     registerPostAPI(app,"/lookup",(req, res) => {
         console.log(req.body)
-        res.json(req.body)
+        lookup(req.body).then((Response)=>{
+            console.log(Response)
+            res.json(Response)
+        })
     })
 }
 export default init;

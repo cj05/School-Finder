@@ -1,3 +1,5 @@
+console.log("Loading Modules")
+
 import fs from 'fs';
 import express from 'express';
 import { createServer } from 'vite';
