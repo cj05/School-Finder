@@ -7,17 +7,17 @@ import { useState, useEffect } from 'react';
 const Apitest = () => {
 
   const [posts, setPosts] = useState({});
-  const [N, setN] = useState(0);
+  const [N, setN] = useState({});
   
 
     var jsonData = {
-      "N":10
+      "Data":{}
     }
   
     function handleClick() {
-      jsonData["N"] = N
+      jsonData["Data"] = N
       // Send data to the backend via POST
-      fetch('http://localhost:3000/api/test', {  // Enter your IP address here
+      fetch('http://localhost/api/lookup', {  // Enter your IP address here
   
         method: 'POST', 
         headers: { 'Content-Type': 'application/json' } ,
@@ -31,15 +31,22 @@ const Apitest = () => {
       
     }
 
+    
+
   return (
     <>
       <label>
           Name:
-          <input type="text" value={N} onChange={e => setN(Number(e.target.value) )} />
+          <input type="text" onChange={e => setN(JSON.parse(e.target.value) )} style={{
+        textAlign: 'center',
+        width: '700px',
+        border: '1px solid gray',
+        borderRadius: '5px'
+      }}/>
         </label>
       <div onClick={handleClick} style={{
         textAlign: 'center',
-        width: '100px',
+        width: '700px',
         border: '1px solid gray',
         borderRadius: '5px'
       }}>

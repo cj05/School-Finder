@@ -5,6 +5,7 @@ import express from 'express';
 import { createServer } from 'vite';
 import apiHandler from './api/apihandler.js'
 import ViteExpress from "vite-express";
+import Model from './serverFiles/model.js';
 
 import test from './test.js'
 //import Model from './serverFiles/model.ts'
@@ -14,7 +15,9 @@ const app = express();
 apiHandler(app)
 
 //for(var i = 0;i<10;i++)
-    await test()
+//await test()
+
+await Model.LoadDB(process.cwd()+"\\db\\model",process.cwd()+"\\db")
 
 
 //Model.PrepData([[1,2],[3,4,5]]).print()

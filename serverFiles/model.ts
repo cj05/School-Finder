@@ -44,6 +44,13 @@ class model {
         return tf.tensor2d(cartesianP)
     }
 
+    getCatagoryData(){
+        return this.config["Catagory_Key_Data"]
+    }
+    getUniData(){
+        return this.config["Uni_Key_Data"]
+    }
+
     /*
     BuildModel(size:number,n:number,d:number){
         //tensorflow model
@@ -167,6 +174,8 @@ class model {
     }
 
     GenerateModel(Bigdata: {
+
+        //bad runtime algorithm
         name: string;
         data: any[][];
     }[]) {
