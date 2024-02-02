@@ -1,4 +1,4 @@
-import Model from '../serverFiles/model.ts'
+import Model from '../build/model.js'
 import log from '../log.js'
 async function lookup(Input){
     console.log(typeof Input)

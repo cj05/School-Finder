@@ -1,7 +1,7 @@
 import tf, { Tensor2D } from "@tensorflow/tfjs-node" 
 import { npy } from "tfjs-npy-node";
 import fs from "fs"
-import DH from './datahandler.ts'
+import DH from './datahandler.js'
 
 class SimpleModel{
     private Data: tf.Variable[] = []

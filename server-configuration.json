@@ -1,4 +1,4 @@
 {
-    "PerformSSR":true,
+    "PerformSSR":false,
     "ClusterProcessCount":-1
 }

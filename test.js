@@ -1,6 +1,6 @@
 import { StopWatch } from 'stopwatch-node';
-import Model from './serverFiles/model.ts';
-import SModel from './serverFiles/simplemodel.ts';
+import Model from './build/model.js';
+import SModel from './build/simplemodel.js';
 import fs from "fs"
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 

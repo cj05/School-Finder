@@ -4,10 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "npx tsx server.js",
+    "dev": "npx tsx server.js && vite preview --port 80",
     "build": "tsc --project ./tsconfig.json && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview --port 8080"
+    "preview": "vite preview --port 8080",
+    "transpile": "tsc --project ./serverFiles/tsconfig.json",
+    "prod": ""
   },
   "dependencies": {
     "@tensorflow/tfjs-node": "^4.16.0",
