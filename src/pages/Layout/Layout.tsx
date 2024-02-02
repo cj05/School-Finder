@@ -1,8 +1,8 @@
-import { Outlet, Link } from "react-router-dom";
+import { Outlet} from "react-router-dom";
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+//import NavDropdown from 'react-bootstrap/NavDropdown';
 import styles from './LayoutComponent.module.scss';
 import { LinkContainer } from 'react-router-bootstrap';
 import Account from "../AccountTab/Account";

@@ -1,6 +1,6 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import Button from 'react-bootstrap/Button';
+//import React from 'react'
+//import ReactDOM from 'react-dom/client'
+//import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
 function CardO() {

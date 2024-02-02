@@ -1,11 +1,11 @@
 import bodyParser from 'body-parser'
 import LookupAPI from './LookupAPI.js'
-import PDP from '../serverFiles/postdataprocessor.js'
+import PDP from '../serverFiles/postdataprocessor.ts'
 const registerPostAPI = (app,uri,func) => {
-    app.post("/api"+uri,func)
+    app.post("/api"+uri,(req, res)=>{try{func(req, res)} catch(er2) {res.json('Error sending 500!', er2.stack); console.error('Error sending 500!', er2.stack);}})
 }
 const registerGetAPI = (app,uri,func) => {
-    app.get("/api"+uri,func)
+    app.get("/api"+uri,(req, res)=>{try{func(req, res)} catch(er2) {res.json('Error sending 500!', er2.stack); console.error('Error sending 500!', er2.stack);}})
 }
 const registerPostGetAPI = (app,uri,func) => {
     registerPostAPI(app,uri,func)

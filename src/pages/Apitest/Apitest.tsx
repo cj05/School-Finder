@@ -1,6 +1,4 @@
-import Card from '../../assets/Components/cards';
-import styles from './ApitestComponent.module.scss';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 
 

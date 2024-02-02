@@ -1,4 +1,3 @@
-import { Outlet, Link } from "react-router-dom";
 import { useLocation } from 'react-router-dom'
 const NoPage = () => {
   const location = useLocation();

@@ -1,0 +1,4 @@
+{
+    "PerformSSR":true,
+    "ClusterProcessCount":-1
+}
