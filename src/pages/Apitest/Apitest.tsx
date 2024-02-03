@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+import config from "../../../config.js"
 
 
 const Apitest = () => {
@@ -15,7 +15,7 @@ const Apitest = () => {
     function handleClick() {
       jsonData["Data"] = N
       // Send data to the backend via POST
-      fetch('http://localhost/api/lookup', {  // Enter your IP address here
+      fetch(`http://localhost/${config.Path}api/lookup`, {  // Enter your IP address here
   
         method: 'POST', 
         headers: { 'Content-Type': 'application/json' } ,

@@ -1,9 +1,10 @@
 
 import styles from './AccountComponent.module.scss';
 import { Image } from 'react-bootstrap';
+import config from "../../../config.js"
 const Account = () => {
     const getAvatar = () => {
-        const fallback = "/img/fallbackAvatar.png"; 
+        const fallback = `${config.Path}/img/fallbackAvatar.png`; 
         return fallback;
     }
   return (

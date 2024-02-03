@@ -3,14 +3,16 @@
 import Model from '../../model/model.js'
 import PDP from '../../model/postdataprocessor.js'
 import { useEffect , useState } from 'react';
-const model = () => {
+import config from "../../../config.js"
+
+const model = ()=>{
   const [smodel, setModel] = useState(Model);
   const [prediction, setPrediction] = useState({});
   useEffect(() => {
     async function loadModel() {
       // "threshold" The the confidence interval for the classier.
       // Higher values = the model is more confident about its prediction.
-      Model.LoadDB("model")
+      Model.LoadDB(`${config.Path}model`)
       setModel(Model)
     }
     if (typeof smodel.Data[0] === 'undefined') {

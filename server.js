@@ -10,7 +10,7 @@ import cluster from 'cluster'
 import os from 'os'
 import test from './test.js'
 import log from './log.js'
-
+import config from './config.js';
 const port = 29342
 
 //if(cluster.isMaster){
@@ -36,7 +36,7 @@ await Model.LoadDB(process.cwd() + "\\db\\model", process.cwd() + "\\db")
 
 //ViteExpress.listen(app, 80, () => log.log("Connected to http://localhost:80"));
 app.listen(port, () => {
-    log.log(`Worker [${process.pid}] Connected to http://localhost:${port}`)
+    log.log(`Worker [${process.pid}] Connected to http://localhost${config.Path}:${port}`)
     process.send('ready')
 })
 

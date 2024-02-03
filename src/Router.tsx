@@ -6,14 +6,14 @@ import Contact from './pages/Home/Home'
 import NoPage from './pages/404'
 import Layout from "./pages/Layout/Layout";
 import Apitest from "./pages/Apitest/Apitest";
-
+import config from "../config.js"
 function Router() {
     return (
         <>
             
             <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<Layout/>}>
+                    <Route path={config.Path} element={<Layout/>}>
                         <Route index element={<Home />} />
                         <Route path="home" element={<Home />} />
                         <Route path="aboutme" element={<About />} />

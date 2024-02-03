@@ -6,6 +6,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import styles from './LayoutComponent.module.scss';
 import { LinkContainer } from 'react-router-bootstrap';
 import Account from "../AccountTab/Account";
+import config from "../../../config.js"
 const Layout = () => {
   return (
     <>
@@ -15,24 +16,24 @@ const Layout = () => {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <LinkContainer to="/home">
+                        <LinkContainer to={`${config.Path}home`}>
                             <Nav.Link>Home</Nav.Link>
                         </LinkContainer>
 
-                        <LinkContainer to="/subject">
+                        <LinkContainer to={`${config.Path}subject`}>
                             <Nav.Link>Subject</Nav.Link>
                         </LinkContainer>
                         
-                        <LinkContainer to="/uni">
+                        <LinkContainer to={`${config.Path}uni`}>
                             <Nav.Link>University</Nav.Link>
                         </LinkContainer>
 
-                        <LinkContainer to="/contacts">
+                        <LinkContainer to={`${config.Path}contacts`}>
                             <Nav.Link>Contacts</Nav.Link>
                         </LinkContainer>
                         </Nav>
                         <Nav className="ms-auto">
-                        <LinkContainer to="/accounts" className={styles.right}>
+                        <LinkContainer to={`${config.Path}accounts`} className={styles.right}>
                             <Nav.Link><Account/></Nav.Link>
                         </LinkContainer>
                     </Nav>
