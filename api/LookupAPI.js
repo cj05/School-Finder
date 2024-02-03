@@ -6,7 +6,7 @@ async function lookup(Input){
         return "Error: Format Mismatch"
     }
     log.log(typeof Input.Data)
-    return (await Model.Run(Input.Data)).dataSync()
+    return (await Model.Run(Input.Data)).map((x)=>x.dataSync())
 }
 function catagory(){
     return Model.getCatagoryData()
