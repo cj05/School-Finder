@@ -1,16 +1,16 @@
 class PDP {
-    UniSort(ModelOutput, uniArr) {
-        const scoringArr = ModelOutput[0]
-        const confidentArr = ModelOutput[1]
-        //console.log(scoringArr);
+    UniSort(modelOutput, uniArr) {
+        //console.log(scoringArr)
+        const scoringArr = modelOutput[0];
+        const confidentArr = modelOutput[1];
         const items = [[]];
         for (var i = 0; i < scoringArr.length; i++) {
-            items[i] = [scoringArr[i], uniArr[i],confidentArr[i]];
+            items[i] = [scoringArr[i], confidentArr[i], uniArr[i]];
         }
-        //console.log(items);
+        //console.log(items)
         //items = list(dict.items())
-        items.sort((x, y, z) => Number(y[0]) - Number(x[0]));
-        //console.log(items);
+        items.sort((x, y) => (Number(y[0]) - Number(y[1])) - (Number(x[0]) - Number(x[1])));
+        //console.log(items)
         return items;
     }
 }

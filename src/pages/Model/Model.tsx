@@ -25,7 +25,7 @@ const model = ()=>{
     
       const predictionsTensor = await smodel?.Run(JSON.parse(event.target.value))
       console.log(predictionsTensor)
-      const predictions = PDP.UniSort(predictionsTensor.dataSync(),Model.getUniData())
+      const predictions = PDP.UniSort(predictionsTensor.map((x)=>x.dataSync()),Model.getUniData())
       console.log(predictions)
       setPrediction(
         
