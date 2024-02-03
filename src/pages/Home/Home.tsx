@@ -1,9 +1,9 @@
-import Card from '../../assets/Components/cards';
+import Model from '../Model/Model.tsx';
 //import styles from './HomeComponent.module.scss';
 const Home = () => {
   return (
     <div>
-      <Card/>
+      <Model/>
     </div>
   );
 };
