@@ -9,7 +9,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview --port 8080",
     "transpile": "tsc --project ./serverFiles/tsconfig.json",
-    "prod": ""
+    "tdev": "tsc --project ./serverFiles/tsconfig.json && npx tsx server.js && vite preview --port 80"
   },
   "dependencies": {
     "@tensorflow/tfjs-node": "^4.16.0",

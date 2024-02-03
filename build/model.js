@@ -94,48 +94,61 @@ class model {
     }
     async PredictModel(Input) {
         //Proof of concept
-        //console.log("Predicting....")
+        //log.log("Predicting....")
         //Input.print()
         //const size = Input.shape[0]
         //const d = Input.shape[1]
-        //console.log(size)
+        var confidence = this.config["Confidence"];
+        if (typeof confidence === 'undefined' || confidence > 1 || confidence < 0) {
+            confidence = 0.9;
+        }
+        const z = Math.abs(this.percentile_z((1 - confidence) / 2)) / 2; //we div by 0 because out value is 0 -> 1 not -1 -> 1
+        //log.log(z)
         //uni datas
         const uni_vec_data = this.Data[0];
         const uni_count = uni_vec_data.shape[0];
         if (uni_vec_data.shape[1] != Input.shape[0] || uni_vec_data.shape[2] != Input.shape[1])
             throw new Error(`Input Tensor Shape Differs from database (${uni_vec_data.shape[1]} ,${uni_vec_data.shape[2]} ) -> (${Input.shape[0]} ,${Input.shape[1]} )`);
         //const uni_weight = tf.randomUniform([uni_count,size])
-        //console.log("Database:")
+        //log.log("Database:")
         //uni_vec_data.print()
-        //console.log("Weights:")
-        //console.log("1/5")
+        //log.log("Weights:")
+        //log.log("1/5")
         //normalize in prep for cosine distance
         const normal_norm = tf.norm(Input, 2, -1, true); //O(n^3)
         const normal = Input.divNoNan(normal_norm); //O(n^3)
         const uni_weight = tf.norm(uni_vec_data, 2, -1, true); //O(n^3)
         const normal_uni_data = uni_vec_data.divNoNan(uni_weight); //O(n^3)
+        const uni_weight_value = tf.norm(uni_vec_data, 2, -1, false);
         //tf.
         //uni_weight.print()
         //normal_uni_data.print()
-        //console.log("2/5")
+        //log.log("2/5")
         //pad it out in prep for cosine distance
         const pad_normal = tf.tile(tf.expandDims(normal, 0), [uni_count, 1, 1]); //O(n^3)
         //pad_normal.print()
         //cosine distance
-        //console.log("3/5")
+        //log.log("3/5")
         const cd_data = normal_uni_data.mul(pad_normal).sum(-1);
         const cs_data = cd_data.add(1).mul(0.5);
-        //console.log("4/5")
+        //log.log("4/5")
         //cs_data.print()
-        const weighted_cs = cs_data.mul(uni_weight.sum(-1));
+        const weighted_cs = cs_data.mul(uni_weight_value);
         //weighted_cs.print()
-        const prediction = weighted_cs.sum(-1).divNoNan(uni_weight.sum(-1).sum(-1));
+        const average = weighted_cs.sum(-1).divNoNan(uni_weight_value.sum(-1));
         //uni_vec_data.print()
         //uni_weight.print()
-        //console.log("5/5")
+        //log.log("5/5")
         //prediction.print()
-        //console.log("Complete")
-        return prediction;
+        //log.log("Complete")
+        //Calculate SD for interval
+        const padded_average = weighted_cs.sum(-1, true).divNoNan(uni_weight_value.sum(-1, true));
+        const Difference = cs_data.sub(padded_average);
+        const squared_difference = Difference.square();
+        const weighted_squared_difference = squared_difference.mul(uni_weight_value);
+        const SD = weighted_squared_difference.sum(-1).divNoNan(uni_weight_value.sum(-1).mul(Input.shape[1] - 1)).sqrt();
+        const Confidence = SD.divNoNan(Math.sqrt(Input.shape[1]) / z); //+- of the mean
+        return [average, Confidence];
     }
     async TrainablePredictor(Input) {
         return this.PredictModel(Input);
@@ -145,12 +158,27 @@ class model {
         //TODO()
         TrueUserMatching;
     }
+    percentile_z(p) {
+        if (p < 0.5)
+            return -this.percentile_z(1 - p);
+        if (p > 0.92) {
+            if (p == 1)
+                return Infinity;
+            let r = Math.sqrt(-Math.log(1 - p));
+            return (((2.3212128 * r + 4.8501413) * r - 2.2979648) * r - 2.7871893) /
+                ((1.6370678 * r + 3.5438892) * r + 1);
+        }
+        p -= 0.5;
+        let r = p * p;
+        return p * (((-25.4410605 * r + 41.3911977) * r - 18.6150006) * r + 2.5066282) /
+            ((((3.1308291 * r - 21.0622410) * r + 23.0833674) * r - 8.4735109) * r + 1);
+    }
     async LoadDB(PathToModelData, PathToBigData, ForceGenerate = false, Debug = false) {
-        //console.log("Loading Data")
+        //log.log("Loading Data")
         if (typeof this.Data[0] === 'undefined' || ForceGenerate || Debug) {
-            //console.log("Loading Database")
+            //log.log("Loading Database")
             if ((!fs.existsSync(PathToModelData + "\\weight.npy")) || ForceGenerate) {
-                //console.log("Not Found, Generating Model From Scratch")
+                //log.log("Not Found, Generating Model From Scratch")
                 if (!fs.existsSync(PathToBigData + "\\bigData.xlsx")) {
                     throw new Error("Bigdata file: " + PathToBigData + "\\bigData.xlsx does not exist");
                 }
@@ -164,7 +192,7 @@ class model {
             this.Data[0] = tf.variable(await npy.load(`${PathToModelData}\\weight.npy`));
             //this.Data[1] = await npy.load(`${PathToModelData}\\vector.npy`);
         }
-        //console.log("Complete")
+        //log.log("Complete")
         return this.Data;
     }
     GenerateModel(Bigdata) {
@@ -207,14 +235,15 @@ class model {
             }
         }
         ModelKeyData;
-        //console.log(ModelSkillData)
-        //console.log(ModelInterestData)
-        //console.log(JSON.stringify(ModelKeyData))
-        //console.log(JSON.stringify(ModelData))
+        //log.log(ModelSkillData)
+        //log.log(ModelInterestData)
+        //log.log(JSON.stringify(ModelKeyData))
+        //log.log(JSON.stringify(ModelData))
         this.config["skill_count"] = ModelData[0][0].length;
         this.config["interest_count"] = ModelData[0][1].length;
         this.config["Uni_Key_Data"] = ModelKeyData;
         this.config["Catagory_Key_Data"] = CatagoryNameData;
+        this.config["Confidence"] = 0.9;
         const VectorNodeData = this.GenerateCartesianVectorNodes(ModelData);
         //VectorNodeData.print()
         return [VectorNodeData];
