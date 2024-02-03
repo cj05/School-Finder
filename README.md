@@ -12,5 +12,9 @@ after that
 run "npm install"
 run "npm rebuild @tensorflow/tfjs-node --build-addon-from-source"
 
+
+to build your code
+run "npm run build"
+
 to run
-run "npm run dev"
+run "npm run preview"
