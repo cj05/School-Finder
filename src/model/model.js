@@ -174,9 +174,10 @@ const uni_weight_value = tf.norm(uni_vec_data, 2, -1, false);
             ((((3.1308291 * r - 21.0622410) * r + 23.0833674) * r - 8.4735109) * r + 1);
     }
     async LoadDB(URI, ForceGenerate = false, Debug = false) {
-        //log.log("Loading Data")
+        
         if (typeof this.Data[0] === 'undefined' || ForceGenerate || Debug) {
             //console.log("Loading Database")
+            console.log("Downloading Data",this.Data[0])
             var config = "{}"
             var buffer = 0
             await fetch(`${URI}\\config.json`)

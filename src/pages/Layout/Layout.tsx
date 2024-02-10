@@ -1,50 +1,65 @@
-import { Outlet} from "react-router-dom";
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-//import NavDropdown from 'react-bootstrap/NavDropdown';
+
+import { useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import styles from './LayoutComponent.module.scss';
-import { LinkContainer } from 'react-router-bootstrap';
-import Account from "../AccountTab/Account";
+import Footer from "./Footer";
 import config from "../../../config.js"
 const Layout = () => {
-  return (
-    <>
-        <div className={styles.layout}>
-            <Navbar expand="lg" sticky="top" className="bg-body-tertiary">
-                <Container>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="me-auto">
-                        <LinkContainer to={`${config.Path}home`}>
-                            <Nav.Link>Home</Nav.Link>
-                        </LinkContainer>
 
-                        <LinkContainer to={`${config.Path}subject`}>
-                            <Nav.Link>Subject</Nav.Link>
-                        </LinkContainer>
-                        
-                        <LinkContainer to={`${config.Path}uni`}>
-                            <Nav.Link>University</Nav.Link>
-                        </LinkContainer>
+        let navigate = useNavigate();
+        const routeChange = (path) => {
+            path = config.Path+path
+            navigate(path);
+        }
+        return (
+            <>
+            <div className={styles.layout+" flex h-screen flex-col"}>
+                <div className="sticky top-0 z-50 bg-anothershadeofgrey">
+                
 
-                        <LinkContainer to={`${config.Path}contacts`}>
-                            <Nav.Link>Contacts</Nav.Link>
-                        </LinkContainer>
-                        </Nav>
-                        <Nav className="ms-auto">
-                        <LinkContainer to={`${config.Path}accounts`} className={styles.right}>
-                            <Nav.Link><Account/></Nav.Link>
-                        </LinkContainer>
-                    </Nav>
-                    </Navbar.Collapse>
-                </Container>
-            </Navbar>
-            <Outlet />
-        </div>
-        
-    </>
-  )
-};
 
-export default Layout;
+                    <nav className="bg-anothershadeofgrey">
+                        <div className="hidden w-full md:block md:w-auto" id="navbar-default">
+                            <ul className="gap-20 font-medium flex flex-col p-2 md:p-0 mt-4 bg-anothershadeofgrey md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:bg-anothershadeofgrey dark:bg-anothershadeofgrey md:dark:bg-anothershadeofgrey ">
+                                <div className='text-4xl text-center p-3 '>
+                                    Scholar Plan
+                                </div>
+                                <div>
+                                    <button onClick={()=>routeChange("")} className='h-max p-4 text-2xl border-2 border-y-anothershadeofgrey border-x-grey hover:bg-white'>
+                                        Home
+                                    </button>
+                                    <button onClick={()=>routeChange("university")} className='h-max p-4 text-2xl border-2 border-y-anothershadeofgrey border-x-grey hover:bg-white'>
+                                        University
+                                    </button>
+                                    <button onClick={()=>routeChange("program")} className='h-max p-4 text-2xl border-2 border-y-anothershadeofgrey border-x-grey hover:bg-white'>
+                                        Program
+                                    </button>
+                                    <button onClick={()=>routeChange("test")} className='h-max p-4 text-2xl border-2 border-y-anothershadeofgrey border-x-grey hover:bg-white'>
+                                        Test
+                                    </button>
+                                    <button onClick={()=>routeChange("mbti")} className='h-max p-4 text-2xl border-2 border-y-anothershadeofgrey border-x-grey hover:bg-white'>
+                                        MBTI
+                                    </button>
+                                    <button onClick={()=>routeChange("aboutme")} className='h-max p-4 text-2xl border-2 border-y-anothershadeofgrey border-x-grey hover:bg-white'>
+                                        About Us
+                                    </button>
+                                </div>
+                            </ul>
+                        </div>
+                    </nav>
+
+
+                    
+                </div>
+                <div className='bg-white flex-1'>
+                <Outlet />
+                </div>
+                <Footer/>
+                
+            </div>
+            
+            </>
+        )
+    };
+
+    export default Layout;
