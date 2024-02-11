@@ -216,17 +216,19 @@ class model {
         const ParsedData = DH.ParseModelData(Bigdata)
         const ModelSkillData = ParsedData[0]
         const ModelInterestData = ParsedData[1]
-        const ModelKeyData = ParsedData[2]
+        const ModelPersonalityData = ParsedData[2]
+        const ModelKeyData = ParsedData[3]
+        console.log(ModelPersonalityData)
         //const ModelVectorNodeData:Tensor3D = tf.ones([TotalFacultyCount,1,Dimensions])
         //const ModelWeightNodeData:Tensor2D = tf.zeros([1,1])
 
         //now we put it all in one large matrix
         const ModelData: number[][][] = []
-        const CatagoryNameData: string[][] = [[], []] // [dimen,name]
+        const CatagoryNameData: string[][] = [[], [], []] // [dimen,name]
 
         //Skill
         for (var i = 0; i < ModelSkillData.length; i++) {
-            ModelData.push([[], []])
+            ModelData.push([[], [], []])
         }
 
         for (var i = 0; i < ModelSkillData.length; i++) {
@@ -253,6 +255,19 @@ class model {
                     CatagoryNameData[1].push(d[0])
                 }
                 ModelData[i][1][ind] = d[1]
+            }
+        }
+        for (var i = 0; i < ModelPersonalityData.length; i++) {
+            const ar = ModelPersonalityData[i]
+            //const VD:number[][] = [[]]
+            for (var j = 0; j < ar.length; j++) {
+                const d = ar[j]
+                var ind = CatagoryNameData[2].indexOf(d[0])
+                if (ind === -1) {
+                    ind = CatagoryNameData[2].length
+                    CatagoryNameData[2].push(d[0])
+                }
+                ModelData[i][2][ind] = d[1]
             }
         }
         ModelKeyData

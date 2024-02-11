@@ -32,7 +32,7 @@ const app = express();
 
 apiHandler(app)
 
-await Model.LoadDB(process.cwd() + "\\db\\model", process.cwd() + "\\db")
+await Model.LoadDB(process.cwd() + "\\db\\model", process.cwd() + "\\db",true)
 
 //ViteExpress.listen(app, 80, () => log.log("Connected to http://localhost:80"));
 app.listen(port, () => {

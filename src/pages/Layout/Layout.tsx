@@ -15,8 +15,6 @@ const Layout = () => {
             <>
             <div className={styles.layout+" flex h-screen flex-col"}>
                 <div className="sticky top-0 z-50 bg-anothershadeofgrey">
-                
-
 
                     <nav className="bg-anothershadeofgrey">
                         <div className="hidden w-full md:block md:w-auto" id="navbar-default">

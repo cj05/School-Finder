@@ -60,16 +60,35 @@ const Home = () => {
     routeChange("result?name="+JSON.stringify(parameter))
   }
   const generateParameters = ()=>{
-    
-    var parameter = [[0],[0]]
+    var MBTIArr = [Personality]
+    var parameter = [[0],[0],[0]]
     for(var i=1;i<SkillOption.length;i++) parameter[0].push(0)
     for(var i=1;i<InterestOption.length;i++) parameter[1].push(0)
-  console.log(Skill,Interest)
+    for(var i=1;i<4;i++) parameter[2].push(0)
+    
+    MBTIArr.forEach((x)=>{
+      if(x[0]==="I") parameter[2][0]++
+      else parameter[2][0]--
+      if(x[1]==="N") parameter[2][1]++
+      else parameter[2][1]--
+      if(x[2]==="T") parameter[2][2]++
+      else parameter[2][2]--
+      if(x[3]==="P") parameter[2][3]++
+      else parameter[2][3]--
+    })
+
+    parameter[2][0]/=MBTIArr.length
+    parameter[2][1]/=MBTIArr.length
+    parameter[2][2]/=MBTIArr.length
+    parameter[2][3]/=MBTIArr.length
+
+    console.log(Skill,Interest)
     parameter[0][SkillOption.indexOf(Skill)] = 1
     parameter[1][InterestOption.indexOf(Interest)] = 1
     //parameter[0][SkillOption.indexOf(Skill)] = 1
     //if(typeof parameter === "undefined") parameter = [[1,0.7,-0.3,0.6],[0.1,-0.7,0.5,0.9,-0.6,-0.9,-0.3,0,0.1,-0.7,0.5,0.9,0.6,0.9,0.3,0]]
     return parameter
+    
   }
   useEffect(() => {
     Model.LoadDB(`${config.Path}model`).then(()=>{
@@ -95,11 +114,9 @@ const Home = () => {
         </div>
         <div className="flex flex-no-wrap flex-col px-20 mt-12 w-full max-md:px-5 max-md:mt-10 max-md:max-w-full">
           <div className="mr-4 text-xl text-white max-md:mr-2.5 max-md:max-w-full">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic.
+          แพลตฟอร์มด้านการศึกษาของประเทศไทย ที่สร้างขึ้นมาเพื่อรองรับปัญหาด้านการศึกษาสำหรับผู้ที่ต้องการเข้าศึกษาต่อในระดับอุดมศึกษา เป็นแหล่งรวมข้อมูลด้านการศึกษาต่อในมหาวิทยาลัย มีข้อมูลพื้นฐานและข้อมูลการรับสมัครของแต่ละมหาวิทยาลัยที่เป็นประโยชน์ต่อผู้ใช้งาน เพื่อเป็นตัวช่วยในการประกอบการตัดสินใจในการเข้าศึกษาต่อของผู้ใช้งาน​
+
+โดยผู้ใช้งานสามารถค้นหารายชื่อมหาวิทยาลัย คณะ และสาขาต่าง ๆ นอกจากนี้ผู้ใช้งานยังสามารถค้นหาความถนัดผ่านการทำข้อสอบเข้ามหาวิทยาลัยฉบับจริง และค้นหาความชอบผ่านการทำแบบทดสอบบุคลิกภาพ ตามทฤษฎีทางจิตวิทยา ทั้งนี้ระบบจะแสดงผลลัพธ์เป็นสาขาและคณะของมหาวิทยาลัยต่าง ๆ ที่ตรงกับความถนัดและความชอบของผู้ใช้งาน
           </div>{" "}
           <div className="flex flex-wrap  sm:flex-no-wrap gap-5 justify-start pr-2 mt-28 mr-4  max-md:mt-10 max-md:mr-2.5 max-md:max-w-full content-normal">
             <div className="max-w-100 outline-none" >
