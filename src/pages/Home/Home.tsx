@@ -110,7 +110,7 @@ const Home = () => {
 
   return (
     <div className="flex flex-col bg-white">
-      <div className="flex flex-col w-full bg-grey max-md:max-w-full bg-[url('img/home.png')]">
+      <div className="flex flex-col w-full bg-grey max-md:max-w-full bg-[url('https://cj05.github.io/School-Finder/img/home.png')]">
         <div className="flex flex-col px-20 mt-14 text-white max-md:px-5 max-md:mt-10 max-md:max-w-full">
           <div className="mr-4 text-6xl md:text-9xl max-md:mr-2.5 max-md:max-w-full bg-gradient-to-r from-white to-blue inline-block text-transparent bg-clip-text">
             Scholar Plan
