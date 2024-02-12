@@ -49,7 +49,7 @@ const about = (props) => {
   function lookup() {
     try {
       var parameter = searchParams.get('name');
-      if (parameter === null) parameter = "[[0,0,0,0], [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], [0,0,0,0]]"
+      if (parameter === null) parameter = "[[0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], [0,0,0,0]]"
       var result = localStorage.getItem(JSON.stringify(parameter));
       if (typeof result === "undefined" || result === null) {
         searchHandler.search(JSON.parse(parameter), (res) => {
