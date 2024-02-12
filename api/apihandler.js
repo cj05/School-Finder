@@ -26,6 +26,9 @@ const init = (app) => {
             const SortedResponse = PDP.UniSort(Response,LookupAPI.uni())
             //console.log(SortedResponse)
             console.log("Processed Uni Scored Lookup")
+            if(typeof Response !== "object"){
+                res.status(501).text("Error Processing Data")
+            }
             res.json(SortedResponse)
         }).catch()
     })

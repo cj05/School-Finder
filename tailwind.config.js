@@ -27,6 +27,8 @@ export default withMT({
       'anothershadeofgrey': "#929292",
       'blue': "#4B9EEA",
       'blue-darker': "#4D4DFF",
+      'light-blue': "#EEEFFF",
+      'yellow-darker': "#FF9600",
      },
   },
   plugins: [],

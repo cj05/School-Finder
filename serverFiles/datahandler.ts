@@ -2,6 +2,7 @@ import xlsx from 'node-xlsx';
 import cliProgress from 'cli-progress';
 
 // create a new progress bar instance and use shades_classic theme
+var MBTIWeight = 0.4
 
 function Load(Path: string) {
     const workSheetsFromFile = xlsx.parse(Path);
@@ -162,13 +163,13 @@ function ParseModelData(Bigdata: {
                             
                         })
                     })
-                    PersonalityFacultyData[0] = ["IE", (tIE / cIE)]
+                    PersonalityFacultyData[0] = ["IE", (tIE / cIE * MBTIWeight)]
                     if(cIE === 0) PersonalityFacultyData[0] = ["IE", 0]
-                    PersonalityFacultyData[1] = ["NS", (tNS / cNS)]
+                    PersonalityFacultyData[1] = ["NS", (tNS / cNS * MBTIWeight)]
                     if(cNS === 0) PersonalityFacultyData[1] = ["NS", 0]
-                    PersonalityFacultyData[2] = ["TF", (tTF / cTF)]
+                    PersonalityFacultyData[2] = ["TF", (tTF / cTF * MBTIWeight)]
                     if(cTF === 0) PersonalityFacultyData[2] = ["TF", 0]
-                    PersonalityFacultyData[3] = ["PJ", (tPJ / cPJ)]
+                    PersonalityFacultyData[3] = ["PJ", (tPJ / cPJ * MBTIWeight)]
                     if(cPJ === 0) PersonalityFacultyData[3] = ["PJ", 0]
                 }
                 

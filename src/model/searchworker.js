@@ -28,12 +28,12 @@ addEventListener("message", event => {
   
   async function compute(parameters) {
     // generating membership card takes some amount of time
-    console.log(parameters)
+    //console.log(parameters)
     
     const predictionsTensor = await Model?.Run(parameters)
-    console.log(predictionsTensor)
+    //console.log(predictionsTensor)
     const predictions = PDP.UniSort(predictionsTensor.map((x)=>x.dataSync()),Model.getUniData())
-    console.log(predictions)
+    //console.log(predictions)
     return predictions
   }
 

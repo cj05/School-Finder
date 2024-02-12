@@ -1,6 +1,7 @@
 import xlsx from 'node-xlsx';
 import cliProgress from 'cli-progress';
 // create a new progress bar instance and use shades_classic theme
+var MBTIWeight = 0.4;
 function Load(Path) {
     const workSheetsFromFile = xlsx.parse(Path);
     //console.log(workSheetsFromFile)
@@ -88,10 +89,10 @@ function ParseModelData(Bigdata) {
                 const PersonalityFacultyData = [[]];
                 if (typeof PD === "undefined" || typeof PD.split !== "function") {
                     //console.log(UniName,FacultyName,PD,j)
-                    PersonalityFacultyData[0] = ["IE", 0.5];
-                    PersonalityFacultyData[1] = ["NS", 0.5];
-                    PersonalityFacultyData[2] = ["TF", 0.5];
-                    PersonalityFacultyData[2] = ["PJ", 0.5];
+                    PersonalityFacultyData[0] = ["IE", 0];
+                    PersonalityFacultyData[1] = ["NS", 0];
+                    PersonalityFacultyData[2] = ["TF", 0];
+                    PersonalityFacultyData[2] = ["PJ", 0];
                 }
                 else {
                     var tIE = 0;
@@ -141,18 +142,18 @@ function ParseModelData(Bigdata) {
                             cPJ += 1;
                         });
                     });
-                    PersonalityFacultyData[0] = ["IE", (tIE / cIE)];
+                    PersonalityFacultyData[0] = ["IE", (tIE / cIE * MBTIWeight)];
                     if (cIE === 0)
-                        PersonalityFacultyData[0] = ["IE", 0.5];
-                    PersonalityFacultyData[1] = ["NS", (tNS / cNS)];
+                        PersonalityFacultyData[0] = ["IE", 0];
+                    PersonalityFacultyData[1] = ["NS", (tNS / cNS * MBTIWeight)];
                     if (cNS === 0)
-                        PersonalityFacultyData[1] = ["NS", 0.5];
-                    PersonalityFacultyData[2] = ["TF", (tTF / cTF)];
+                        PersonalityFacultyData[1] = ["NS", 0];
+                    PersonalityFacultyData[2] = ["TF", (tTF / cTF * MBTIWeight)];
                     if (cTF === 0)
-                        PersonalityFacultyData[2] = ["TF", 0.5];
-                    PersonalityFacultyData[3] = ["PJ", (tPJ / cPJ)];
+                        PersonalityFacultyData[2] = ["TF", 0];
+                    PersonalityFacultyData[3] = ["PJ", (tPJ / cPJ * MBTIWeight)];
                     if (cPJ === 0)
-                        PersonalityFacultyData[3] = ["PJ", 0.5];
+                        PersonalityFacultyData[3] = ["PJ", 0];
                 }
                 //I-E
                 //x[j].split("\n").forEach((e: string) => {

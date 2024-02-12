@@ -1,6 +1,6 @@
 import Model from '../../model/model.js';
 //import * as React from "react";
-//import styles from './HomeComponent.module.scss';
+import styles from './HomeComponent.module.scss';
 import Widget from '../../assets/Components/widget.tsx'
 import Widget2 from '../../assets/Components/widget2.tsx'
 import { Select, Option } from "@material-tailwind/react";
@@ -8,6 +8,7 @@ import  { useState, useEffect } from 'react'
 import { useNavigate } from "react-router-dom";
 import config from "../../../config.js"
 //import searchHandler from '../../model/search.js'
+import textmapper from '../../assets/textmapper.js'
 const Home = () => {
   
   
@@ -39,6 +40,8 @@ const Home = () => {
     "ESTP",
     "ESFP"
   ])
+
+
   setPersonalityOption
   var CD
   
@@ -52,12 +55,14 @@ const Home = () => {
       navigate(path);
       
   }
+
+
   Personality
 
   const lookupRedirect = ()=>{
     var parameter = generateParameters()
     
-    routeChange("result?name="+JSON.stringify(parameter))
+    routeChange("result?name="+JSON.stringify(parameter)+"&d="+ JSON.stringify({"Sel":[[Skill],[Interest],[Personality]],"Test":false}))
   }
   const generateParameters = ()=>{
     var MBTIArr = [Personality]
@@ -77,10 +82,12 @@ const Home = () => {
       else parameter[2][3]--
     })
 
-    parameter[2][0]/=MBTIArr.length
-    parameter[2][1]/=MBTIArr.length
-    parameter[2][2]/=MBTIArr.length
-    parameter[2][3]/=MBTIArr.length
+    if(MBTIArr.length>0){
+      parameter[2][0] /= MBTIArr.length
+      parameter[2][1] /= MBTIArr.length
+      parameter[2][2] /= MBTIArr.length
+      parameter[2][3] /= MBTIArr.length
+    } 
 
     console.log(Skill,Interest)
     parameter[0][SkillOption.indexOf(Skill)] = 1
@@ -103,9 +110,9 @@ const Home = () => {
 
   return (
     <div className="flex flex-col bg-white">
-      <div className="flex flex-col py-12 w-full bg-blue-darker max-md:max-w-full">
+      <div className="flex flex-col w-full bg-grey max-md:max-w-full bg-[url('img/home.png')]">
         <div className="flex flex-col px-20 mt-14 text-white max-md:px-5 max-md:mt-10 max-md:max-w-full">
-          <div className="mr-4 text-6xl md:text-9xl max-md:mr-2.5 max-md:max-w-full ">
+          <div className="mr-4 text-6xl md:text-9xl max-md:mr-2.5 max-md:max-w-full bg-gradient-to-r from-white to-blue inline-block text-transparent bg-clip-text">
             Scholar Plan
           </div>
           <div className="ml-20 text-base whitespace-nowrap">
@@ -119,25 +126,25 @@ const Home = () => {
 โดยผู้ใช้งานสามารถค้นหารายชื่อมหาวิทยาลัย คณะ และสาขาต่าง ๆ นอกจากนี้ผู้ใช้งานยังสามารถค้นหาความถนัดผ่านการทำข้อสอบเข้ามหาวิทยาลัยฉบับจริง และค้นหาความชอบผ่านการทำแบบทดสอบบุคลิกภาพ ตามทฤษฎีทางจิตวิทยา ทั้งนี้ระบบจะแสดงผลลัพธ์เป็นสาขาและคณะของมหาวิทยาลัยต่าง ๆ ที่ตรงกับความถนัดและความชอบของผู้ใช้งาน
           </div>{" "}
           <div className="flex flex-wrap  sm:flex-no-wrap gap-5 justify-start pr-2 mt-28 mr-4  max-md:mt-10 max-md:mr-2.5 max-md:max-w-full content-normal">
-            <div className="max-w-100 outline-none" >
-              <Select variant="outlined" className="w-full max-w-200 rounded-2xl bg-white h-10 text-2xl text-center content-center" onChange={e=>{console.log(e);if(typeof e !== "undefined")setSkill(e)}} >
-                {SkillOption.map((a)=><Option value={a}>{a}</Option>)}
+            <div className="w-25 outline-none" >
+              <Select variant="outlined" className="overflow-hidden truncate w-full max-w-200 rounded-2xl bg-white h-10 text-xl text-center content-center" onChange={e=>{console.log(e);if(typeof e !== "undefined")setSkill(e)}} >
+                {SkillOption.map((a)=><Option value={a}>{textmapper(a)}</Option>)}
               </Select>
             </div>
-            <div className="max-w-100 outline-none">
-              <Select variant="outlined" className="w-full max-w-200 rounded-2xl bg-white h-10 text-2xl text-center content-center" onChange={e=>{console.log(e);if(typeof e !== "undefined")setInterest(e)}} >
-                {InterestOption.map((a)=><Option value={a}>{a}</Option>)}
+            <div className="w-25 outline-none">
+              <Select variant="outlined" className="overflow-hidden truncate w-full max-w-200 rounded-2xl bg-white h-10 text-xl text-center content-center" onChange={e=>{console.log(e);if(typeof e !== "undefined")setInterest(e)}} >
+                {InterestOption.map((a)=><Option value={a}>{textmapper(a)}</Option>)}
               </Select>
             </div>
-            <div className="max-w-100 outline-none ">
-              <Select variant="outlined" className="w-full max-w-200 rounded-2xl bg-white h-10 text-2xl text-center content-center" onChange={e=>{console.log(e);if(typeof e !== "undefined")setPersonality(e)}} >
-                {PersonalityOption.map((a)=><Option value={a}>{a}</Option>)}
+            <div className="w-25 outline-none ">
+              <Select variant="outlined" className="overflow-hidden truncate w-full max-w-200 rounded-2xl bg-white h-10 text-xl text-center content-center" onChange={e=>{console.log(e);if(typeof e !== "undefined")setPersonality(e)}} >
+                {PersonalityOption.map((a)=><Option value={a}>{textmapper(a)}</Option>)}
               </Select>
             </div>
           </div>{" "}
           
           <div className="relative flex-col justify-center self-center px-14 py-5 mt-9 text-xl text-white whitespace-nowrap aspect-[3.04] rounded-2xl max-md:px-5">
-            <button onClick={()=>lookupRedirect()} className="py-3 px-12 bg-blue self-center rounded-2xl ">Search</button>
+            <button onClick={()=>lookupRedirect()} className="py-6 px-24 bg-blue self-center rounded-2xl text-3xl">Search</button>
           </div>
         </div>
       </div>{" "}
@@ -162,8 +169,8 @@ const Home = () => {
           </div>
         </div>
       </div>{" "}
-      <div className="flex z-10 flex-col px-20 py-12 -mt-3.5 w-full bg-blue-darker max-md:px-5 max-md:max-w-full">
-        <div className="self-start text-6xl text-white max-md:max-w-full max-md:text-4xl">
+      <div className="flex z-10 flex-col px-20 py-12 -mt-3.5 w-full bg-light-blue max-md:px-5 max-md:max-w-full">
+        <div className="self-start text-6xl text-black max-md:max-w-full max-md:text-4xl">
           Lorem Ipsum
         </div>{" "}
         <div className="self-center mt-8 w-full max-w-[1500px] max-md:max-w-full">
@@ -182,7 +189,7 @@ const Home = () => {
             </div>
           </div>
         </div>{" "}
-        <div className="self-start mt-12 text-6xl text-white max-md:mt-10 max-md:max-w-full max-md:text-4xl">
+        <div className="self-start mt-12 text-6xl text-black max-md:mt-10 max-md:max-w-full max-md:text-4xl">
           Lorem Ipsum
         </div>{" "}
         <div className="self-center mt-8 mb-3 w-full max-w-[1170px] max-md:max-w-full">

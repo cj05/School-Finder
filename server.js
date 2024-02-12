@@ -6,6 +6,7 @@ import { createServer } from 'vite';
 import apiHandler from './api/apihandler.js'
 //import ViteExpress from "vite-express";
 import Model from './build/model.js';
+import generateArchive from './build/generateArchive.js'
 import cluster from 'cluster'
 import os from 'os'
 import test from './test.js'
@@ -32,6 +33,7 @@ const app = express();
 
 apiHandler(app)
 
+//await generateArchive.Generate(process.cwd() + "\\db",process.cwd() + "\\db\\archive",true)
 await Model.LoadDB(process.cwd() + "\\db\\model", process.cwd() + "\\db",true)
 
 //ViteExpress.listen(app, 80, () => log.log("Connected to http://localhost:80"));
@@ -41,4 +43,4 @@ app.listen(port, () => {
         process.send('ready')
 })
 
-//}
+//}*/
