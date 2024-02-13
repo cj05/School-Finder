@@ -126,17 +126,17 @@ const Home = () => {
 โดยผู้ใช้งานสามารถค้นหารายชื่อมหาวิทยาลัย คณะ และสาขาต่าง ๆ นอกจากนี้ผู้ใช้งานยังสามารถค้นหาความถนัดผ่านการทำข้อสอบเข้ามหาวิทยาลัยฉบับจริง และค้นหาความชอบผ่านการทำแบบทดสอบบุคลิกภาพ ตามทฤษฎีทางจิตวิทยา ทั้งนี้ระบบจะแสดงผลลัพธ์เป็นสาขาและคณะของมหาวิทยาลัยต่าง ๆ ที่ตรงกับความถนัดและความชอบของผู้ใช้งาน
           </div>{" "}
           <div className="flex flex-wrap  sm:flex-no-wrap gap-5 justify-start pr-2 mt-28 mr-4  max-md:mt-10 max-md:mr-2.5 max-md:max-w-full content-normal">
-            <div className="w-25 outline-none" >
+            <div className="w-25 bg-white rounded-[15px] shadow border-2 border-indigo-600" >
               <Select variant="outlined" className="overflow-hidden truncate w-full max-w-200 rounded-2xl bg-white h-10 text-xl text-center content-center" onChange={e=>{console.log(e);if(typeof e !== "undefined")setSkill(e)}} >
                 {SkillOption.map((a)=><Option value={a}>{textmapper(a)}</Option>)}
               </Select>
             </div>
-            <div className="w-25 outline-none">
+            <div className="w-25 bg-white rounded-[15px] shadow border-2 border-indigo-600">
               <Select variant="outlined" className="overflow-hidden truncate w-full max-w-200 rounded-2xl bg-white h-10 text-xl text-center content-center" onChange={e=>{console.log(e);if(typeof e !== "undefined")setInterest(e)}} >
                 {InterestOption.map((a)=><Option value={a}>{textmapper(a)}</Option>)}
               </Select>
             </div>
-            <div className="w-25 outline-none ">
+            <div className="w-25 bg-white rounded-[15px] shadow border-2 border-indigo-600 ">
               <Select variant="outlined" className="overflow-hidden truncate w-full max-w-200 rounded-2xl bg-white h-10 text-xl text-center content-center" onChange={e=>{console.log(e);if(typeof e !== "undefined")setPersonality(e)}} >
                 {PersonalityOption.map((a)=><Option value={a}>{textmapper(a)}</Option>)}
               </Select>
@@ -149,10 +149,10 @@ const Home = () => {
         </div>
       </div>{" "}
       <div className="flex flex-col px-16 py-12 w-full bg-white max-md:px-5 max-md:max-w-full">
-        <div className="text-5xl font-extrabold tracking-wide text-black leading-[64.8px] max-md:max-w-full max-md:text-4xl">
+        <div className="text-5xl  tracking-wide text-black leading-[64.8px] max-md:max-w-full max-md:text-4xl">
           What You Can Do?
         </div>{" "}
-        <div className="mt-16 mb-6 max-md:mt-10 max-md:max-w-full">
+        <div className="mt-16 c max-md:mt-10 max-md:max-w-full">
           <div className="flex flex-wrap sm:flex-no-wrap gap-5 max-md:flex-col max-md:gap-0 max-md:">
             <div className="flex grow basis-96 flex-col w-[30%] min-w[30%] max-md:ml-0 max-md:w-full">
               <Widget2 title="Search University It is a long established fact that a reader will be distracted
@@ -174,7 +174,7 @@ const Home = () => {
           Lorem Ipsum
         </div>{" "}
         <div className="self-center mt-8 w-full max-w-[1500px] max-md:max-w-full">
-          <div className="flex flex-wrap-reverse gap-5 max-md:flex-col max-md:gap-0 max-md:">
+          <div className="flex  gap-5 max-md:flex-col max-md:gap-0 max-md:">
             <div className="flex grow basis-96 flex-col ml-5 w-[30%] min-w[30%] max-md:ml-0 max-md:w-full">
               <Widget title="Lorem Ipsum" buttonText="more"/>
             </div>{" "}
@@ -192,8 +192,8 @@ const Home = () => {
         <div className="self-start mt-12 text-6xl text-black max-md:mt-10 max-md:max-w-full max-md:text-4xl">
           Lorem Ipsum
         </div>{" "}
-        <div className="self-center mt-8 mb-3 w-full max-w-[1170px] max-md:max-w-full">
-          <div className="flex flex-wrap-reverse gap-5 max-md:flex-col max-md:gap-0 max-md:">
+        <div className="self-center mt-8 mb-3 w-full max-w-[1500px] max-md:max-w-full">
+          <div className="flex  gap-5 max-md:flex-col max-md:gap-0 max-md:">
             <div className="flex grow basis-96 flex-col ml-5 w-[30%] min-w[30%] max-md:ml-0 max-md:w-full">
               <Widget title="Lorem Ipsum" buttonText="more"/>
             </div>{" "}
