@@ -112,41 +112,20 @@ class model {
             throw new Error(`Input Tensor Shape Differs from database (${uni_vec_data.shape[1]} ,${uni_vec_data.shape[2]} ) -> (${Input.shape[0]} ,${Input.shape[1]} )`)
         //const uni_weight = tf.randomUniform([uni_count,size])
 
-        //log.log("Database:")
-        //uni_vec_data.print()
-
-        //log.log("Weights:")
-        //log.log("1/5")
         //normalize in prep for cosine distance
         const normal_norm = tf.norm(Input, 2, -1, true) //O(n^3)
         const normal = Input.divNoNan(normal_norm) //O(n^3)
         const uni_weight = tf.norm(uni_vec_data, 2, -1, true) //O(n^3)
         const normal_uni_data = uni_vec_data.divNoNan(uni_weight) //O(n^3)
         const uni_weight_value = tf.norm(uni_vec_data, 2, -1, false)
-        //tf.
-        //uni_weight.print()
-        //normal_uni_data.print()
-        //log.log("2/5")
         //pad it out in prep for cosine distance
         const pad_normal = tf.tile(tf.expandDims(normal, 0), [uni_count, 1, 1]) //O(n^3)
-        //pad_normal.print()
         //cosine distance
-        //log.log("3/5")
         const cd_data = normal_uni_data.mul(pad_normal).sum(-1)
         const cs_data = cd_data.add(1).mul(0.5)
-        //log.log("4/5")
-        //cs_data.print()
         const weighted_cs = cs_data.mul(uni_weight_value)
-        //weighted_cs.print()
         const average = weighted_cs.sum(-1).divNoNan(uni_weight_value.sum(-1))
-        
-        //uni_vec_data.print()
-        //uni_weight.print()
-        //log.log("5/5")
-        //prediction.print()
-        //log.log("Complete")
         //Calculate SD for interval
-
         const padded_average = weighted_cs.sum(-1,true).divNoNan(uni_weight_value.sum(-1,true))
         const Difference = cs_data.sub(padded_average)
         const squared_difference = Difference.square()

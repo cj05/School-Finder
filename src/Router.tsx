@@ -14,6 +14,7 @@ import TestForm from "./pages/TestForm/testForm"
 import University from "./pages/University/University"
 import Program from "./pages/Program/program"
 import ComponentTest from "./pages/ComponentTest/aboutme"
+import TestResults from "./pages/TestResult/testResult"
 import config from "../config.js"
 function Router() {
     return (
@@ -23,6 +24,7 @@ function Router() {
                 <Routes>
                     <Route path={config.Path} element={<Layout/>}>
                         <Route index element={<Home />} />
+                        <Route path="testResult" element={<TestResults />} />
                         <Route path="home" element={<Home />} />
                         <Route path="aboutme" element={<About />} />
                         <Route path="contact" element={<Contact />} />
