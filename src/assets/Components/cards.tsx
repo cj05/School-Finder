@@ -18,8 +18,8 @@ function CardO(props) {
           </div>
           <img
             loading="lazy"
-            srcSet="..."
-            className="aspect-square w-[35px]"
+            srcSet="img\Heart.png"
+            className="aspect-square w-[35px] h-[35px]"
           />
         </div>
       </Link>
