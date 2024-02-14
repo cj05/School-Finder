@@ -13,7 +13,7 @@ const about = () => {
                 <div className="grow px-12 py-12 w-full bg-white rounded-xl max-md:px-5 max-md:mt-2.5 max-md:max-w-full">
                   <div className="flex gap-5 max-md:flex-col max-md:gap-0 max-md:">
                     <div className="flex flex-col w-[27%] max-md:ml-0 max-md:w-full">
-                      <div className="justify-center items-center self-stretch px-8 pt-4 my-auto w-full text-6xl text-white whitespace-nowrap bg-black h-[180px] max-md:px-5 max-md:mt-10 max-md:text-4xl">
+                      <div className="justify-center items-center self-stretch px-8 pt-4 my-auto w-full text-6xl text-white whitespace-nowrap bg-black h-[180px] w -[180px] max-md:px-5 max-md:mt-10 max-md:text-4xl">
                         logo
                       </div>
                     </div>
@@ -28,8 +28,8 @@ const about = () => {
                         <div className="flex gap-0 justify-between mt-7 text-2xl text-black max-md:flex-wrap max-md:max-w-full">
                           <img
                             loading="lazy"
-                            srcSet="..."
-                            className="aspect-square w-[50px]"
+                            srcSet="img\Location.png"
+                            className="aspec t-square w-[50px] h-[50px]" 
                           />
                           <div className="flex-auto max-md:max-w-full">
                             Mall Road, Krishna Nagar, Dehradun, <br />
@@ -116,25 +116,7 @@ const about = () => {
           <div className="flex gap-5 justify-between mt-6 text-base whitespace-nowrap max-md:flex-wrap max-md:mr-1.5 max-md:max-w-full">
             <div className="flex flex-col flex-1 px-3 pt-12 pb-3.5 bg-white rounded-xl shadow-[0px_4px_4px_rgba(77.00000301003456,77.00000301003456,255,1)]">
               <div className="mt-24 text-xl text-orange-400 max-md:mt-10">
-                คณะ..........................
-              </div>
-              <div className="mt-3.5 text-yellow-400">จำนวน....สาขา</div>
-              <div className="justify-center px-3 py-2.5 mt-3.5 text-white bg-indigo-600 rounded-xl">
-                More
-              </div>
-            </div>
-            <div className="flex flex-col flex-1 px-3 pt-12 pb-3.5 bg-white rounded-xl shadow-[0px_4px_4px_rgba(77.00000301003456,77.00000301003456,255,1)]">
-              <div className="mt-24 text-xl text-orange-400 max-md:mt-10">
-                คณะ..........................
-              </div>
-              <div className="mt-3.5 text-yellow-400">จำนวน....สาขา</div>
-              <div className="justify-center px-3 py-2.5 mt-3.5 text-white bg-indigo-600 rounded-xl">
-                More
-              </div>
-            </div>
-            <div className="flex flex-col flex-1 px-3 pt-12 pb-3.5 bg-white rounded-xl shadow-[0px_4px_4px_rgba(77.00000301003456,77.00000301003456,255,1)]">
-              <div className="mt-24 text-xl text-orange-400 max-md:mt-10">
-                คณะ..........................
+                คณะ..
               </div>
               <div className="mt-5 text-yellow-400">จำนวน....สาขา</div>
               <div className="justify-center px-3 py-2.5 mt-3.5 text-white bg-indigo-600 rounded-xl">
@@ -143,7 +125,7 @@ const about = () => {
             </div>
             <div className="flex flex-col flex-1 px-3 pt-12 pb-3.5 bg-white rounded-xl shadow-[0px_4px_4px_rgba(77.00000301003456,77.00000301003456,255,1)]">
               <div className="mt-24 text-xl text-orange-400 max-md:mt-10">
-                คณะ..........................
+                คณะ..
               </div>
               <div className="mt-5 text-yellow-400">จำนวน....สาขา</div>
               <div className="justify-center px-3 py-2.5 mt-3.5 text-white bg-indigo-600 rounded-xl">
@@ -152,7 +134,7 @@ const about = () => {
             </div>
             <div className="flex flex-col flex-1 px-3 pt-12 pb-3.5 bg-white rounded-xl shadow-[0px_4px_4px_rgba(77.00000301003456,77.00000301003456,255,1)]">
               <div className="mt-24 text-xl text-orange-400 max-md:mt-10">
-                คณะ..........................
+                คณะ..
               </div>
               <div className="mt-5 text-yellow-400">จำนวน....สาขา</div>
               <div className="justify-center px-3 py-2.5 mt-3.5 text-white bg-indigo-600 rounded-xl">
@@ -161,7 +143,25 @@ const about = () => {
             </div>
             <div className="flex flex-col flex-1 px-3 pt-12 pb-3.5 bg-white rounded-xl shadow-[0px_4px_4px_rgba(77.00000301003456,77.00000301003456,255,1)]">
               <div className="mt-24 text-xl text-orange-400 max-md:mt-10">
-                คณะ..........................
+                คณะ..
+              </div>
+              <div className="mt-5 text-yellow-400">จำนวน....สาขา</div>
+              <div className="justify-center px-3 py-2.5 mt-3.5 text-white bg-indigo-600 rounded-xl">
+                More
+              </div>
+            </div>
+            <div className="flex flex-col flex-1 px-3 pt-12 pb-3.5 bg-white rounded-xl shadow-[0px_4px_4px_rgba(77.00000301003456,77.00000301003456,255,1)]">
+              <div className="mt-24 text-xl text-orange-400 max-md:mt-10">
+                คณะ..
+              </div>
+              <div className="mt-5 text-yellow-400">จำนวน....สาขา</div>
+              <div className="justify-center px-3 py-2.5 mt-3.5 text-white bg-indigo-600 rounded-xl">
+                More
+              </div>
+            </div>
+            <div className="flex flex-col flex-1 px-3 pt-12 pb-3.5 bg-white rounded-xl shadow-[0px_4px_4px_rgba(77.00000301003456,77.00000301003456,255,1)]">
+              <div className="mt-24 text-xl text-orange-400 max-md:mt-10">
+                คณะ..
               </div>
               <div className="mt-5 text-yellow-400">จำนวน....สาขา</div>
               <div className="justify-center px-3 py-2.5 mt-3.5 text-white bg-indigo-600 rounded-xl">
@@ -172,7 +172,7 @@ const about = () => {
           <div className="flex gap-5 justify-between mt-5 mb-5 text-base whitespace-nowrap max-md:flex-wrap max-md:mr-1.5 max-md:max-w-full">
             <div className="flex flex-col flex-1 px-3 pt-12 pb-3.5 bg-white rounded-xl shadow-[0px_4px_4px_rgba(77.00000301003456,77.00000301003456,255,1)]">
               <div className="mt-24 text-xl text-orange-400 max-md:mt-10">
-                คณะ..........................
+                คณะ..
               </div>
               <div className="mt-5 text-yellow-400">จำนวน....สาขา</div>
               <div className="justify-center px-3 py-2.5 mt-3.5 text-white bg-indigo-600 rounded-xl">
@@ -181,7 +181,7 @@ const about = () => {
             </div>
             <div className="flex flex-col flex-1 px-3 pt-12 pb-3.5 bg-white rounded-xl shadow-[0px_4px_4px_rgba(77.00000301003456,77.00000301003456,255,1)]">
               <div className="mt-24 text-xl text-orange-400 max-md:mt-10">
-                คณะ..........................
+                คณะ..
               </div>
               <div className="mt-5 text-yellow-400">จำนวน....สาขา</div>
               <div className="justify-center px-3 py-2.5 mt-3.5 text-white bg-indigo-600 rounded-xl">
@@ -190,7 +190,7 @@ const about = () => {
             </div>
             <div className="flex flex-col flex-1 px-3 pt-12 pb-3.5 bg-white rounded-xl shadow-[0px_4px_4px_rgba(77.00000301003456,77.00000301003456,255,1)]">
               <div className="mt-24 text-xl text-orange-400 max-md:mt-10">
-                คณะ..........................
+                คณะ..
               </div>
               <div className="mt-5 text-yellow-400">จำนวน....สาขา</div>
               <div className="justify-center px-3 py-2.5 mt-3.5 text-white bg-indigo-600 rounded-xl">
@@ -199,7 +199,7 @@ const about = () => {
             </div>
             <div className="flex flex-col flex-1 px-3 pt-12 pb-3.5 bg-white rounded-xl shadow-[0px_4px_4px_rgba(77.00000301003456,77.00000301003456,255,1)]">
               <div className="mt-24 text-xl text-orange-400 max-md:mt-10">
-                คณะ..........................
+                คณะ..
               </div>
               <div className="mt-5 text-yellow-400">จำนวน....สาขา</div>
               <div className="justify-center px-3 py-2.5 mt-3.5 text-white bg-indigo-600 rounded-xl">
@@ -208,7 +208,7 @@ const about = () => {
             </div>
             <div className="flex flex-col flex-1 px-3 pt-12 pb-3.5 bg-white rounded-xl shadow-[0px_4px_4px_rgba(77.00000301003456,77.00000301003456,255,1)]">
               <div className="mt-24 text-xl text-orange-400 max-md:mt-10">
-                คณะ..........................
+                คณะ..
               </div>
               <div className="mt-5 text-yellow-400">จำนวน....สาขา</div>
               <div className="justify-center px-3 py-2.5 mt-3.5 text-white bg-indigo-600 rounded-xl">
@@ -217,7 +217,7 @@ const about = () => {
             </div>
             <div className="flex flex-col flex-1 px-3 pt-12 pb-3.5 bg-white rounded-xl shadow-[0px_4px_4px_rgba(77.00000301003456,77.00000301003456,255,1)]">
               <div className="mt-24 text-xl text-orange-400 max-md:mt-10">
-                คณะ..........................
+                คณะ..
               </div>
               <div className="mt-5 text-yellow-400">จำนวน....สาขา</div>
               <div className="justify-center px-3 py-2.5 mt-3.5 text-white bg-indigo-600 rounded-xl">
